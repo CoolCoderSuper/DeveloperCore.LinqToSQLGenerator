@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Firelight Management" Class="dcCustomerDataContext" BaseType="DataContext" EntityBase="Object" Provider="String" ContextNamespace="Test" EntityNamespace="Ho" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Property" Member="Properties" AccessModifier="Internal" Modifier="Virtual">
+    <Type Name="Property" InheritanceCode="test" IsInheritanceDefault="true" AccessModifier="Public" Modifier="Sealed">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" AutoSync="Never" Storage="test"  AccessModifier="Internal" Modifier="New" Member="testw" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" Member="TestingThing" Storage="yodawg" />
+      <Column Name="PropertyName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" IsReadOnly="True" IsDiscriminator="True" IsVersion="True" Expression="test"/>
+      <Column Name="Address1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" Member="Noice" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateLastChanged" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" IsDelayLoaded="True" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Property_CustomerContact" Member="CustomerContacts" ThisKey="UniqueID" OtherKey="PropertyUniqueID" Type="CustomerContact" />
+      <Association Name="Customer_Property" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Asset" Member="Assets">
+    <Type Name="Asset">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RelationUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="URL" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateLastEdited" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Asset_AssetDocument" Member="AssetDocuments" ThisKey="UniqueID" OtherKey="AssetUniqueID" Type="AssetDocument" />
+      <Association Name="Asset_AssetRevision" Member="AssetRevisions" ThisKey="UniqueID" OtherKey="AssetUniqueID" Type="AssetRevision" />
+      <Association Name="CategoryRelation_Asset" Member="CategoryRelation" ThisKey="RelationUniqueID" OtherKey="UniqueID" Type="CategoryRelation" IsForeignKey="true" />
+      <Association Name="Customer_Asset" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetCategory" Member="AssetCategories">
+    <Type Name="AssetCategory">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CategoryName" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Icon" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="AssetCategory_CategoryRelation" Member="CategoryRelations" ThisKey="UniqueID" OtherKey="CategoryUniqueID" Type="CategoryRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CategoryRelation" Member="CategoryRelations">
+    <Type Name="CategoryRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CategoryUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ParentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="CategoryRelation_Asset" Member="Assets" ThisKey="UniqueID" OtherKey="RelationUniqueID" Type="Asset" />
+      <Association Name="AssetCategory_CategoryRelation" Member="AssetCategory" ThisKey="CategoryUniqueID" OtherKey="UniqueID" Type="AssetCategory" IsForeignKey="true" />
+      <Association Name="Customer_CategoryRelation" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerContact" Member="CustomerContacts">
+    <Type Name="CustomerContact">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PropertyUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MobilePhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Quote" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Invoice" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateLastChanged" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Property_CustomerContact" Member="Propertyy" ThisKey="PropertyUniqueID" OtherKey="UniqueID" Type="Property" IsForeignKey="true" />
+      <Association Name="Customer_CustomerContact" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PrefCustomerMsgUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultShipToUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultTermUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultTaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultInvoiceContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address1" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FaxNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AltPhoneNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerNotes" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DisableShipAddress" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateLastEdited" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MailInvoices" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Customer_Property" Member="Properties" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="Property" />
+      <Association Name="Customer_Asset" Member="Assets" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="Asset" />
+      <Association Name="Customer_CategoryRelation" Member="CategoryRelations" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CategoryRelation" />
+      <Association Name="Customer_CustomerContact" Member="CustomerContacts" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CustomerContact" />
+      <Association Name="Customer_CustomerAlertMessageRelation" Member="CustomerAlertMessageRelations" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CustomerAlertMessageRelation" />
+      <Association Name="Customer_CustomerDocument" Member="CustomerDocuments" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CustomerDocument" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerAlertMessageRelation" Member="CustomerAlertMessageRelations">
+    <Type Name="CustomerAlertMessageRelation">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_CustomerAlertMessageRelation" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+      <Association Name="CustomerAlertMessage_CustomerAlertMessageRelation" Member="CustomerAlertMessage" ThisKey="MessageUniqueID" OtherKey="UniqueID" Type="CustomerAlertMessage" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerDocument" Member="CustomerDocuments">
+    <Type Name="CustomerDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateAttached" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_CustomerDocument" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetDocument" Member="AssetDocuments">
+    <Type Name="AssetDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AssetUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="RevisionUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Asset_AssetDocument" Member="Asset" ThisKey="AssetUniqueID" OtherKey="UniqueID" Type="Asset" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetRevision" Member="AssetRevisions">
+    <Type Name="AssetRevision">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AssetUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RelationUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="URL" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateLastEdited" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Asset_AssetRevision" Member="Asset" ThisKey="AssetUniqueID" OtherKey="UniqueID" Type="Asset" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerAlertMessage" Member="CustomerAlertMessages">
+    <Type Name="CustomerAlertMessage">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDialog" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="CustomerAlertMessage_CustomerAlertMessageRelation" Member="CustomerAlertMessageRelations" ThisKey="UniqueID" OtherKey="MessageUniqueID" Type="CustomerAlertMessageRelation" />
+    </Type>
+  </Table>
+  <Function Name="dbo.GetCustomerBalance" Method="GetCustomerBalance">
+    <Parameter Name="CustomerUniqueID" Parameter="customerUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="VoidStatusUniqueID" Parameter="voidStatusUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="GetCustomerBalanceResult">
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceTotal" Type="System.Decimal" DbType="Decimal(38,3) NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentTotal" Type="System.Decimal" DbType="Decimal(38,3) NOT NULL" CanBeNull="false" />
+      <Column Name="CreditTotal" Type="System.Decimal" DbType="Decimal(38,3) NOT NULL" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Decimal(38,3)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <RootNamespace>ConsoleApp1</RootNamespace>
+        <TargetFramework>net7.0</TargetFramework>
+        <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+        <CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)\GeneratedFiles</CompilerGeneratedFilesOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!--<AdditionalFiles Include="..\ConsoleApp1\*.dbml" />-->
+        <Analyzer Include="..\DeveloperCore.LinqToSQLGenerator\bin\Debug\netstandard2.0\DeveloperCore.LinqToSQLGenerator.dll" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="SD.Tools.LinqToSQL2">
+        <HintPath>..\SD.Tools.LinqToSQL2.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <AdditionalFiles Include="..\ConsoleApp1\dcFirelight.dbml"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="dcCustomer.designer.vb">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>dcCustomer.dbml</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DeveloperCore.LinqToSQLGenerator", "DeveloperCore.LinqToSQLGenerator\DeveloperCore.LinqToSQLGenerator.vbproj", "{E661F5E0-268D-4160-8D46-8801F74B94D7}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.vbproj", "{373F6753-3A87-4EE5-BC3F-B0D2051D570B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E661F5E0-268D-4160-8D46-8801F74B94D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E661F5E0-268D-4160-8D46-8801F74B94D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E661F5E0-268D-4160-8D46-8801F74B94D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E661F5E0-268D-4160-8D46-8801F74B94D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{373F6753-3A87-4EE5-BC3F-B0D2051D570B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{373F6753-3A87-4EE5-BC3F-B0D2051D570B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{373F6753-3A87-4EE5-BC3F-B0D2051D570B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{373F6753-3A87-4EE5-BC3F-B0D2051D570B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,2016 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ITERP" Class="dcFirelightDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.Term" Member="Terms">
+    <Type Name="Term">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TermName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Days" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.WorkHour" Member="WorkHours">
+    <Type Name="WorkHour">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Hours" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShipVia" Member="ShipVias">
+    <Type Name="ShipVia">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ListID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EditSequence" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipViaName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaxCode" Member="TaxCodes">
+    <Type Name="TaxCode">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="QBPurchaseRateID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PurchaseRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="QBSalesRateID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SalesRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Rate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SchedulerLabel" Member="SchedulerLabels">
+    <Type Name="SchedulerLabel">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Colour" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PolicyAlert" Member="PolicyAlerts">
+    <Type Name="PolicyAlert">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="GroupUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Body" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="PolicyAlertGroup_PolicyAlert" Member="PolicyAlertGroup" ThisKey="GroupUniqueID" OtherKey="UniqueID" Type="PolicyAlertGroup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PolicyAlertGroup" Member="PolicyAlertGroups">
+    <Type Name="PolicyAlertGroup">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RecurrenceInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LastShownUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="PolicyAlertGroup_PolicyAlert" Member="PolicyAlerts" ThisKey="UniqueID" OtherKey="GroupUniqueID" Type="PolicyAlert" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaymentMethod" Member="PaymentMethods">
+    <Type Name="PaymentMethod">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SyncLog" Member="SyncLogs">
+    <Type Name="SyncLog">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ObjectUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ObjectType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TimeStamp" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="StackTrace" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" />
+      <Column Name="IsSuccess" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AuditItem" Member="AuditItems">
+    <Type Name="AuditItem">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TransactionType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RefNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Action" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CompanyUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Subtotal" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Tax" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormSetting" Member="FormSettings">
+    <Type Name="FormSetting">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FormName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsDialog" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="WindowState" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Tabbed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="WindowLocationX" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WindowLocationY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WindowSizeHeight" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WindowSizeWidth" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FormLayout" Member="FormLayouts">
+    <Type Name="FormLayout">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FormName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LayoutType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="XML" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportCategory" Member="ReportCategories">
+    <Type Name="ReportCategory">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Roles" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="ReportCategory_Report" Member="Reports" ThisKey="UniqueID" OtherKey="CategoryUniqueID" Type="Report" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportReference" Member="ReportReferences">
+    <Type Name="ReportReference">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Reference" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="ReportUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Report_ReportReference" Member="Report" ThisKey="ReportUniqueID" OtherKey="UniqueID" Type="Report" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Report" Member="Reports">
+    <Type Name="Report">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="ReportType" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Language" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Script" Type="System.Byte[]" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Report_ReportReference" Member="ReportReferences" ThisKey="UniqueID" OtherKey="ReportUniqueID" Type="ReportReference" />
+      <Association Name="Report_ReportState" Member="ReportStates" ThisKey="UniqueID" OtherKey="ReportUniqueID" Type="ReportState" />
+      <Association Name="ReportCategory_Report" Member="ReportCategory" ThisKey="CategoryUniqueID" OtherKey="UniqueID" Type="ReportCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReportState" Member="ReportStates">
+    <Type Name="ReportState">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ReportUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Report_ReportState" Member="Report" ThisKey="ReportUniqueID" OtherKey="UniqueID" Type="Report" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Article" Member="Articles">
+    <Type Name="Article">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CategoryUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="Data" Type="System.Byte[]" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Author" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Keyword" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+	  <Column Name="IsTemplate" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+	  <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+	  <Column Name="Embeddings" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Association Name="Article_ArticleDocument" Member="ArticleDocuments" ThisKey="UniqueID" OtherKey="ArticleUniqueID" Type="ArticleDocument" />
+      <Association Name="ArticleCategory_Article" Member="ArticleCategory" ThisKey="CategoryUniqueID" OtherKey="UniqueID" Type="ArticleCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArticleCategory" Member="ArticleCategories">
+    <Type Name="ArticleCategory">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Roles" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="ArticleCategory_Article" Member="Articles" ThisKey="UniqueID" OtherKey="CategoryUniqueID" Type="Article" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArticleDocument" Member="ArticleDocuments">
+    <Type Name="ArticleDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ArticleUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="Article_ArticleDocument" Member="Article" ThisKey="ArticleUniqueID" OtherKey="UniqueID" Type="Article" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Role" Member="Roles">
+    <Type Name="Role">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Permissions" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Role_UserRoleRelation" Member="UserRoleRelations" ThisKey="UniqueID" OtherKey="RoleUniqueID" Type="UserRoleRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserRoleRelation" Member="UserRoleRelations">
+    <Type Name="UserRoleRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RoleUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Role_UserRoleRelation" Member="Role" ThisKey="RoleUniqueID" OtherKey="UniqueID" Type="Role" IsForeignKey="true" />
+      <Association Name="User_UserRoleRelation" Member="User" ThisKey="UserUniqueID" OtherKey="UniqueID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProblemReport" Member="ProblemReports">
+    <Type Name="ProblemReport">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ApplicationVersion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="OpenForms" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsUnhandledException" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(5000) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.Byte[]" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Archived" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsException" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserNotification" Member="UserNotifications">
+    <Type Name="UserNotification">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="AlertUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Image" Type="System.Byte[]" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Header" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Body1" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Body2" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Sound" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Template" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AlertDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ExpiryDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsQueued" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsDelivered" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateDelivered" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="User_UserNotification" Member="User" ThisKey="UserUniqueID" OtherKey="UniqueID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserMenuSettings" Member="UserMenuSettings">
+    <Type Name="UserMenuSetting">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CategorySettings" Type="System.String" DbType="VarChar(5000) NOT NULL" CanBeNull="false" />
+      <Column Name="CommandSettings" Type="System.String" DbType="VarChar(5000) NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserMenuSetting" Member="User" ThisKey="UserUniqueID" OtherKey="UniqueID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Colour" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="GetSyncErrorNotifications" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsSystem" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsAdministrator" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="OnPayroll" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="User_UserRoleRelation" Member="UserRoleRelations" ThisKey="UniqueID" OtherKey="UserUniqueID" Type="UserRoleRelation" />
+      <Association Name="User_UserNotification" Member="UserNotifications" ThisKey="UniqueID" OtherKey="UserUniqueID" Type="UserNotification" />
+      <Association Name="User_UserMenuSetting" Member="UserMenuSettings" ThisKey="UniqueID" OtherKey="UserUniqueID" Type="UserMenuSetting" />
+      <Association Name="User_UserSetting" Member="UserSettings" ThisKey="UniqueID" OtherKey="UserUniqueID" Type="UserSetting" />
+      <Association Name="User_GroupUserRelation" Member="GroupUserRelations" ThisKey="UniqueID" OtherKey="UserUniqueID" Type="GroupUserRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserSetting" Member="UserSettings">
+    <Type Name="UserSetting">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CompanyName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CompanyAddress" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CompanyCountry" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CompanyPhoneNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CompanyEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultQuotePrinter" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PackingSlipPrinter" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InvoicePrinter" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PurchaseOrderPrinter" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QuotePrintQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PackingSlipPrintQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="InvoicePrintQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PurchaseOrderPrintQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QuoteTemplate" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PackingSlipTemplate" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PickListTemplate" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InvoiceTemplate" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PurchaseOrderTemplate" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreditMemoTemplate" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RefundReceiptTemplate" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InvoiceFlyerFile" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DaysBetweenSameFlyer" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UseFlyer" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QuoteEmailMessage" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PackingSlipEmailMessage" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InvoiceEmailMessage" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PurchaseOrderEmailMessage" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreditMemoEmailMessage" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RefundReceiptEmailMessage" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowQuotePrintPreview" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowPackingSlipPrintPreview" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowInvoicePrintPreview" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowPurchaseOrderPrintPreview" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Theme" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RequestDocumentsDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AssetDocumentsDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QuoteDocumentsDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TicketDocumentsDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PurchaseOrderDocumentsDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerDocumentsDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultTaxCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MailDirectly" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SMTPServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SMTPPort" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SMTPUserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SMTPPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SMTPEncryption" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UseIMAP" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IMAPServerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IMAPPort" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IMAPUserName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IMAPPassword" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IMAPEncryption" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowQuoteDocumentsDialog" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowPackingSlipDocumentsDialog" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowInvoiceDocumentsDialog" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShowPurchaseOrderDocumentsDialog" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Scanner" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBInvoiceAccount" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBInvoiceTemplate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBPOTemplate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBFilePath" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBSyncConflict" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBItemIncomeAccount" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBPOSyncFrom" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBPOSyncTo" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Font" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FontStyle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FontSize" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DatabaseVersion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RemoteSupportVisitServiceItem" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ServiceVisitServiceItem" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ServiceCallVisitServiceItem" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DeliveryVisitServiceItem" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrderInProgressColour" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrderReceivedColour" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CompanyCustomer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemHighPriceWarningColour" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemLowPriceWarningColour" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ApprovedHoursColour" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ApprovedWeekendHoursColour" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UnassignedResourceName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UnassignedResourceColour" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FutureDailyOccurrenceCount" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FutureWeeklyOccurrenceCount" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FutureMonthlyOccurrenceCount" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FutureYearlyOccurrenceCount" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemUncategorizedCategory" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShippingPriceAccount" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OtherFeesAccount" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DiscountPriceAccount" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBTransactionSyncDays" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBTransactionSyncInterval" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBLastTransactionSync" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBSendEmailOnFailure" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBCreateInvoiceDelayDays" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AutoInvoicingStartTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AutoInvoicingEndTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBOClientID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBOClientSecret" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBORedirectURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBOBaseURL" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBOAppEnvironment" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBORefreshToken" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBORealmID" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ActionWords" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DictionaryFile" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="GrammarFile" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Term" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RecycleBinUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Warehouses" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RefundFromAccount" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReportTemplateDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="KBDocumentsDirectory" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AdminFeeDesc" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AdminFeeItem" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MinimumCharge" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AdminFeeRanges" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CountingVendor" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InterestItem" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LateFeeSubject" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InterestRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DaysLate" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LateFeeAdminFee" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DaysLateAdminFee" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PusherAppKey" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PusherAppId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PusherAppSecret" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PusherCluster" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AutoRefreshChannel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UseItemChecker" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WCURL" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WPURL" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WPUsername" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WPPassword" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WCUncategorizedName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FollowUpDays" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FollowUpSubject" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LateFeeTerms" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ServerRuntimes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LastInvoiceTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ScheduleDaysInAdvanceWarning" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Palette" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MaxDaysAfterTicketCreationToAllowNewVisit" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RequestTimeColours" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MailProvider" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="O365Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="O365AccessToken" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RequestPromptStatuses" Type="System.String" DbType="VarChar(max)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="O365OutgoingEmail" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RequestMessages" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OpenAIToken" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OpenAIModels" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OpenAIDefaultModel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OllamaURL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OllamaModels" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OllamaDefaultModel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultAIProvider" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemCheckerAIProvider" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemCheckerModel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemCheckerPrompt" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="VisitDescriptionPrompt" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClaudeToken" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClaudeModels" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ClaudeDefaultModel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AIEnabled" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OpenAIEmbeddingModels" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OpenAIDefaultEmbeddingModel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OllamaEmbeddingModels" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OllamaDefaultEmbeddingModel" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultEmbeddingProvider" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="User_UserSetting" Member="User" ThisKey="UserUniqueID" OtherKey="UniqueID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Group]" Member="Groups">
+    <Type Name="Group">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Group_GroupUserRelation" Member="GroupUserRelations" ThisKey="UniqueID" OtherKey="GroupUniqueID" Type="GroupUserRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GroupUserRelation" Member="GroupUserRelations">
+    <Type Name="GroupUserRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="GroupUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Group_GroupUserRelation" Member="Group" ThisKey="GroupUniqueID" OtherKey="UniqueID" Type="Group" IsForeignKey="true" />
+      <Association Name="User_GroupUserRelation" Member="User" ThisKey="UserUniqueID" OtherKey="UniqueID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Property" Member="Properties">
+    <Type Name="Property">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PropertyName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Address1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateLastChanged" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Property_CustomerContact" Member="CustomerContacts" ThisKey="UniqueID" OtherKey="PropertyUniqueID" Type="CustomerContact" />
+      <Association Name="Customer_Property" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetCategory" Member="AssetCategories">
+    <Type Name="AssetCategory">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CategoryName" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Icon" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="AssetCategory_CategoryRelation" Member="CategoryRelations" ThisKey="UniqueID" OtherKey="CategoryUniqueID" Type="CategoryRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CategoryRelation" Member="CategoryRelations">
+    <Type Name="CategoryRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CategoryUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ParentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Permissions" Type="System.String" DbType="VarChar(max) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="CategoryRelation_Asset" Member="Assets" ThisKey="UniqueID" OtherKey="RelationUniqueID" Type="Asset" />
+      <Association Name="AssetCategory_CategoryRelation" Member="AssetCategory" ThisKey="CategoryUniqueID" OtherKey="UniqueID" Type="AssetCategory" IsForeignKey="true" />
+      <Association Name="Customer_CategoryRelation" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Customer" Member="Customers">
+    <Type Name="Customer">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PrefCustomerMsgUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultShipToUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultTermUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultTaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultInvoiceContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address1" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FaxNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AltPhoneNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerNotes" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DisableShipAddress" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateLastEdited" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MailInvoices" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="AutoSendDisabledReason" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Customer_Property" Member="Properties" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="Property" />
+      <Association Name="Customer_CategoryRelation" Member="CategoryRelations" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CategoryRelation" />
+      <Association Name="Customer_CustomerAlertMessageRelation" Member="CustomerAlertMessageRelations" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CustomerAlertMessageRelation" />
+      <Association Name="Customer_CustomerDocument" Member="CustomerDocuments" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CustomerDocument" />
+      <Association Name="Customer_Asset" Member="Assets" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="Asset" />
+      <Association Name="Customer_CustomerContact" Member="CustomerContacts" ThisKey="UniqueID" OtherKey="CustomerUniqueID" Type="CustomerContact" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerAlertMessageRelation" Member="CustomerAlertMessageRelations">
+    <Type Name="CustomerAlertMessageRelation">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MessageUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_CustomerAlertMessageRelation" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+      <Association Name="CustomerAlertMessage_CustomerAlertMessageRelation" Member="CustomerAlertMessage" ThisKey="MessageUniqueID" OtherKey="UniqueID" Type="CustomerAlertMessage" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerDocument" Member="CustomerDocuments">
+    <Type Name="CustomerDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateAttached" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_CustomerDocument" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerAlertMessage" Member="CustomerAlertMessages">
+    <Type Name="CustomerAlertMessage">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDialog" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="CustomerAlertMessage_CustomerAlertMessageRelation" Member="CustomerAlertMessageRelations" ThisKey="UniqueID" OtherKey="MessageUniqueID" Type="CustomerAlertMessageRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetDocument" Member="AssetDocuments">
+    <Type Name="AssetDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AssetUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="RevisionUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Asset_AssetDocument" Member="Asset" ThisKey="AssetUniqueID" OtherKey="UniqueID" Type="Asset" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetRevision" Member="AssetRevisions">
+    <Type Name="AssetRevision">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="AssetUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RelationUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedBy" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TypeUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Asset_AssetRevision" Member="Asset" ThisKey="AssetUniqueID" OtherKey="UniqueID" Type="Asset" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetTypeField" Member="AssetTypeFields">
+    <Type Name="AssetTypeField">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TypeUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="AssetType_AssetTypeField" Member="AssetType" ThisKey="TypeUniqueID" OtherKey="UniqueID" Type="AssetType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Asset" Member="Assets">
+    <Type Name="Asset">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RelationUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedBy" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Data" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TypeUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Asset_AssetDocument" Member="AssetDocuments" ThisKey="UniqueID" OtherKey="AssetUniqueID" Type="AssetDocument" />
+      <Association Name="Asset_AssetRevision" Member="AssetRevisions" ThisKey="UniqueID" OtherKey="AssetUniqueID" Type="AssetRevision" />
+      <Association Name="CategoryRelation_Asset" Member="CategoryRelation" ThisKey="RelationUniqueID" OtherKey="UniqueID" Type="CategoryRelation" IsForeignKey="true" />
+      <Association Name="Customer_Asset" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+      <Association Name="AssetType_Asset" Member="AssetType" ThisKey="TypeUniqueID" OtherKey="UniqueID" Type="AssetType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AssetType" Member="AssetTypes">
+    <Type Name="AssetType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Language" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ValidationScript" Type="System.Byte[]" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SummaryScript" Type="System.Byte[]" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ButtonScript" Type="System.Byte[]" DbType="VarBinary(MAX)" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Layout" Type="System.Byte[]" DbType="VarBinary(MAX)" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="AssetType_AssetTypeField" Member="AssetTypeFields" ThisKey="UniqueID" OtherKey="TypeUniqueID" Type="AssetTypeField" />
+      <Association Name="AssetType_Asset" Member="Assets" ThisKey="UniqueID" OtherKey="TypeUniqueID" Type="Asset" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CustomerContact" Member="CustomerContacts">
+    <Type Name="CustomerContact">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PropertyUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FaxNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Quote" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Invoice" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateLastChanged" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Customer_CustomerContact" Member="Customer" ThisKey="CustomerUniqueID" OtherKey="UniqueID" Type="Customer" IsForeignKey="true" />
+      <Association Name="Property_CustomerContact" Member="Property" ThisKey="PropertyUniqueID" OtherKey="UniqueID" Type="Property" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoicePaymentRelation" Member="InvoicePaymentRelations">
+    <Type Name="InvoicePaymentRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PaymentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="InvoiceUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Payment_InvoicePaymentRelation" Member="Payment" ThisKey="PaymentUniqueID" OtherKey="UniqueID" Type="Payment" IsForeignKey="true" />
+      <Association Name="Invoice_InvoicePaymentRelation" Member="Invoice" ThisKey="InvoiceUniqueID" OtherKey="UniqueID" Type="Invoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceLine" Member="InvoiceLines">
+    <Type Name="InvoiceLine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="InvoiceUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TicketUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TicketFilter" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="VisitUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Invoice_InvoiceLine" Member="Invoice" ThisKey="InvoiceUniqueID" OtherKey="UniqueID" Type="Invoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QBPaymentSync" Member="QBPaymentSyncs">
+    <Type Name="QBPaymentSync">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PaymentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Payment_QBPaymentSync" Member="Payment" ThisKey="PaymentUniqueID" OtherKey="UniqueID" Type="Payment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QBInvoiceSync" Member="QBInvoiceSyncs">
+    <Type Name="QBInvoiceSync">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="InvoiceUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Invoice_QBInvoiceSync" Member="Invoice" ThisKey="InvoiceUniqueID" OtherKey="UniqueID" Type="Invoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CreditMemoLine" Member="CreditMemoLines">
+    <Type Name="CreditMemoLine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CreditUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="CreditMemo_CreditMemoLine" Member="CreditMemo" ThisKey="CreditUniqueID" OtherKey="UniqueID" Type="CreditMemo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PaymentCreditRelation" Member="PaymentCreditRelations">
+    <Type Name="PaymentCreditRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PaymentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CreditUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="CreditMemo_PaymentCreditRelation" Member="CreditMemo" ThisKey="CreditUniqueID" OtherKey="UniqueID" Type="CreditMemo" IsForeignKey="true" />
+      <Association Name="Payment_PaymentCreditRelation" Member="Payment" ThisKey="PaymentUniqueID" OtherKey="UniqueID" Type="Payment" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QBCreditSync" Member="QBCreditSyncs">
+    <Type Name="QBCreditSync">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CreditUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="CreditMemo_QBCreditSync" Member="CreditMemo" ThisKey="CreditUniqueID" OtherKey="UniqueID" Type="CreditMemo" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CreditMemo" Member="CreditMemos">
+    <Type Name="CreditMemo">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreditMemoNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreditMemoDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsProcessed" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InternalNotes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReportNotes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="CreditMemo_CreditMemoLine" Member="CreditMemoLines" ThisKey="UniqueID" OtherKey="CreditUniqueID" Type="CreditMemoLine" />
+      <Association Name="CreditMemo_PaymentCreditRelation" Member="PaymentCreditRelations" ThisKey="UniqueID" OtherKey="CreditUniqueID" Type="PaymentCreditRelation" />
+      <Association Name="CreditMemo_QBCreditSync" Member="QBCreditSyncs" ThisKey="UniqueID" OtherKey="CreditUniqueID" Type="QBCreditSync" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RefundReceiptLine" Member="RefundReceiptLines">
+    <Type Name="RefundReceiptLine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RefundUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="RefundReceipt_RefundReceiptLine" Member="RefundReceipt" ThisKey="RefundUniqueID" OtherKey="UniqueID" Type="RefundReceipt" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QBRefundReceiptSync" Member="QBRefundReceiptSyncs">
+    <Type Name="QBRefundReceiptSync">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RefundUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="RefundReceipt_QBRefundReceiptSync" Member="RefundReceipt" ThisKey="RefundUniqueID" OtherKey="UniqueID" Type="RefundReceipt" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RefundReceipt" Member="RefundReceipts">
+    <Type Name="RefundReceipt">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RefundReceiptNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RefundReceiptDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AccountUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AccountName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PaymentMethodUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PaymentMethodName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsProcessed" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InternalNotes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReportNotes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RefNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="RefundReceipt_RefundReceiptLine" Member="RefundReceiptLines" ThisKey="UniqueID" OtherKey="RefundUniqueID" Type="RefundReceiptLine" />
+      <Association Name="RefundReceipt_QBRefundReceiptSync" Member="QBRefundReceiptSyncs" ThisKey="UniqueID" OtherKey="RefundUniqueID" Type="QBRefundReceiptSync" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceTemplateLine" Member="InvoiceTemplateLines">
+    <Type Name="InvoiceTemplateLine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TicketUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Rate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TicketFilter" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Association Name="InvoiceRecurrenceTemplate_InvoiceTemplateLine" Member="InvoiceRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="InvoiceRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceRecurrenceTemplate" Member="InvoiceRecurrenceTemplates">
+    <Type Name="InvoiceRecurrenceTemplate">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="CustomerAddress" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="RecurrenceInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" />
+      <Column Name="TermUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TermName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="InvoiceRecurrenceTemplate_InvoiceTemplateLine" Member="InvoiceTemplateLines" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="InvoiceTemplateLine" />
+      <Association Name="InvoiceRecurrenceTemplate_InvoiceRecurrenceException" Member="InvoiceRecurrenceExceptions" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="InvoiceRecurrenceException" />
+      <Association Name="InvoiceRecurrenceTemplate_Invoice" Member="Invoices" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="Invoice" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InvoiceRecurrenceException" Member="InvoiceRecurrenceExceptions">
+    <Type Name="InvoiceRecurrenceException">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="InvoiceRecurrenceTemplate_InvoiceRecurrenceException" Member="InvoiceRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="InvoiceRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payment" Member="Payments">
+    <Type Name="Payment">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RefNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PaymentDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PaymentMethodUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PaymentMethodName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Amount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Payment_InvoicePaymentRelation" Member="InvoicePaymentRelations" ThisKey="UniqueID" OtherKey="PaymentUniqueID" Type="InvoicePaymentRelation" />
+      <Association Name="Payment_QBPaymentSync" Member="QBPaymentSyncs" ThisKey="UniqueID" OtherKey="PaymentUniqueID" Type="QBPaymentSync" />
+      <Association Name="Payment_PaymentCreditRelation" Member="PaymentCreditRelations" ThisKey="UniqueID" OtherKey="PaymentUniqueID" Type="PaymentCreditRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoice" Member="Invoices">
+    <Type Name="Invoice">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InvoiceNumber" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OccurrenceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerAddress" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TermUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TermName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InternalNotes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerNotes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReportNotes" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsLinked" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsSent" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsProcessed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateSent" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FlyerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PONumber" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Invoice_InvoicePaymentRelation" Member="InvoicePaymentRelations" ThisKey="UniqueID" OtherKey="InvoiceUniqueID" Type="InvoicePaymentRelation" />
+      <Association Name="Invoice_InvoiceLine" Member="InvoiceLines" ThisKey="UniqueID" OtherKey="InvoiceUniqueID" Type="InvoiceLine" />
+      <Association Name="Invoice_QBInvoiceSync" Member="QBInvoiceSyncs" ThisKey="UniqueID" OtherKey="InvoiceUniqueID" Type="QBInvoiceSync" />
+      <Association Name="InvoiceRecurrenceTemplate_Invoice" Member="InvoiceRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="InvoiceRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VisitIssue" Member="VisitIssues">
+    <Type Name="VisitIssue">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VisitUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Problem" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Resolution" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Visit_VisitIssue" Member="Visit" ThisKey="VisitUniqueID" OtherKey="UniqueID" Type="Visit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VisitHardware" Member="VisitHardwares">
+    <Type Name="VisitHardware">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VisitUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Visit_VisitHardware" Member="Visit" ThisKey="VisitUniqueID" OtherKey="UniqueID" Type="Visit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VisitAsset" Member="VisitAssets">
+    <Type Name="VisitAsset">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VisitUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="AssetUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Visit_VisitAsset" Member="Visit" ThisKey="VisitUniqueID" OtherKey="UniqueID" Type="Visit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketDocument" Member="TicketDocuments">
+    <Type Name="TicketDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TicketUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Ticket_TicketDocument" Member="Ticket" ThisKey="TicketUniqueID" OtherKey="UniqueID" Type="Ticket" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuoteDocument" Member="QuoteDocuments">
+    <Type Name="QuoteDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QuoteUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Quote_QuoteDocument" Member="Quote" ThisKey="QuoteUniqueID" OtherKey="UniqueID" Type="Quote" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuoteTask" Member="QuoteTasks">
+    <Type Name="QuoteTask">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TicketUniqueID" Member="QuoteUniqueID" Storage="_QuotetUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VisitNumber" Member="TaskNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AppointmentType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Scheduled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ScheduledTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Billable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TechnicianUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TechnicianName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ObjectType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Label" Type="System.String" DbType="varchar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OffDuty" Type="System.Boolean" DbType="bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ReminderInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Quote_QuoteTask" Member="Quote" ThisKey="QuoteUniqueID" OtherKey="UniqueID" Type="Quote" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QuoteLine" Member="QuoteLines">
+    <Type Name="QuoteLine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QuoteUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="SalesPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Quote_QuoteLine" Member="Quote" ThisKey="QuoteUniqueID" OtherKey="UniqueID" Type="Quote" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VisitReminderTime" Member="VisitReminderTimes">
+    <Type Name="VisitReminderTime">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Quote" Member="Quotes">
+    <Type Name="Quote">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QuoteNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerAddress" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PropertyUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PropertyName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PropertyAddress" Type="System.String" DbType="VarChar(400)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TermsUniqueID" Type="System.String" DbType="VarChar(25)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TermsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InternalNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReportNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsAccepted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RequestUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Quote_QuoteDocument" Member="QuoteDocuments" ThisKey="UniqueID" OtherKey="QuoteUniqueID" Type="QuoteDocument" />
+      <Association Name="Quote_QuoteTask" Member="QuoteTasks" ThisKey="UniqueID" OtherKey="QuoteUniqueID" Type="QuoteTask" />
+      <Association Name="Quote_QuoteLine" Member="QuoteLines" ThisKey="UniqueID" OtherKey="QuoteUniqueID" Type="QuoteLine" />
+      <Association Name="Quote_Ticket" Member="Tickets" ThisKey="UniqueID" OtherKey="QuoteUniqueID" Type="Ticket" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VisitItem" Member="VisitItems">
+    <Type Name="VisitItem">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VisitUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Hidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="MinimumCharge" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Visit_VisitItem" Member="Visit" ThisKey="VisitUniqueID" OtherKey="UniqueID" Type="Visit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketRecurrenceException" Member="TicketRecurrenceExceptions">
+    <Type Name="TicketRecurrenceException">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="TicketRecurrenceTemplate_TicketRecurrenceException" Member="TicketRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TicketRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaskRecurrenceException" Member="TaskRecurrenceExceptions">
+    <Type Name="TaskRecurrenceException">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="TaskRecurrenceTemplate_TaskRecurrenceException" Member="TaskRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TaskRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.vSchedulerData" Member="Visits">
+    <Type Name="Visit">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TicketUniqueID" Member="ParentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="VisitNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QueueOrder" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OccurrenceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AppointmentType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VisitType" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Label" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Scheduled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AllDay" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Billable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ScheduledTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PrepTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DrivingTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ServiceTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AdminTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="BillingTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="BillingDescription" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OffDuty" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ReminderInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RecurrenceInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PropertyUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PropertyName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PropertyAddress" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TechnicianUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TechnicianName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ObjectType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RequestUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Visit_VisitIssue" Member="VisitIssues" ThisKey="UniqueID" OtherKey="VisitUniqueID" Type="VisitIssue" />
+      <Association Name="Visit_VisitHardware" Member="VisitHardwares" ThisKey="UniqueID" OtherKey="VisitUniqueID" Type="VisitHardware" />
+      <Association Name="Visit_VisitAsset" Member="VisitAssets" ThisKey="UniqueID" OtherKey="VisitUniqueID" Type="VisitAsset" />
+      <Association Name="Visit_VisitItem" Member="VisitItems" ThisKey="UniqueID" OtherKey="VisitUniqueID" Type="VisitItem" />
+      <Association Name="TaskRecurrenceTemplate_Visit" Member="TaskRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TaskRecurrenceTemplate" IsForeignKey="true" />
+      <Association Name="Ticket_Visit" Member="Ticket" ThisKey="ParentUniqueID" OtherKey="UniqueID" Type="Ticket" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TaskRecurrenceTemplate" Member="TaskRecurrenceTemplates">
+    <Type Name="TaskRecurrenceTemplate">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RecurrenceInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ReminderInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TechnicianUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TechnicianName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DaysInAdvance" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Scheduled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ScheduledTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Label" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OffDuty" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TaskRecurrenceTemplate_TaskRecurrenceException" Member="TaskRecurrenceExceptions" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="TaskRecurrenceException" />
+      <Association Name="TaskRecurrenceTemplate_Visit" Member="Visits" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="Visit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Ticket" Member="Tickets">
+    <Type Name="Ticket">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TicketNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QuoteUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerAddress" Type="System.String" DbType="VarChar(400) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CustomerNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InternalNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OccurrenceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TermsUniqueID" Type="System.String" DbType="VarChar(25)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TermsName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PONumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ManagerUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ManagerName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OpenAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateSent" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateClosed" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsClosed" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UseAdminFee" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ReportNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Ticket_TicketDocument" Member="TicketDocuments" ThisKey="UniqueID" OtherKey="TicketUniqueID" Type="TicketDocument" />
+      <Association Name="Ticket_Visit" Member="Visits" ThisKey="UniqueID" OtherKey="ParentUniqueID" Type="Visit" />
+      <Association Name="Quote_Ticket" Member="Quote" ThisKey="QuoteUniqueID" OtherKey="UniqueID" Type="Quote" IsForeignKey="true" />
+      <Association Name="TicketRecurrenceTemplate_Ticket" Member="TicketRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TicketRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketTemplateDocument" Member="TicketTemplateDocuments">
+    <Type Name="TicketTemplateDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="TicketRecurrenceTemplate_TicketTemplateDocument" Member="TicketRecurrenceTemplate" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TicketRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketTemplateAsset" Member="TicketTemplateAssets">
+    <Type Name="TicketTemplateAsset">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="AssetUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="TicketTemplateVisit_TicketTemplateAsset" Member="TicketTemplateVisit" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TicketTemplateVisit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketTemplateIssue" Member="TicketTemplateIssues">
+    <Type Name="TicketTemplateIssue">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Problem" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="Resolution" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Association Name="TicketTemplateVisit_TicketTemplateIssue" Member="TicketTemplateVisit" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TicketTemplateVisit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketTemplateItem" Member="TicketTemplateItems">
+    <Type Name="TicketTemplateItem">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TotalPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxRate" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="Hidden" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="MinimumCharge" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="TicketTemplateVisit_TicketTemplateItem" Member="TicketTemplateVisit" ThisKey="TemplateUniqueID" OtherKey="UniqueID" Type="TicketTemplateVisit" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketRecurrenceTemplate" Member="TicketRecurrenceTemplates">
+    <Type Name="TicketRecurrenceTemplate">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="CustomerAddress" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="ProblemRequest" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" />
+      <Column Name="RecurrenceInfo" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="DaysInAdvance" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TechnicianUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TechnicianName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UseAdminFee" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TicketRecurrenceTemplate_TicketRecurrenceException" Member="TicketRecurrenceExceptions" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="TicketRecurrenceException" />
+      <Association Name="TicketRecurrenceTemplate_Ticket" Member="Tickets" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="Ticket" />
+      <Association Name="TicketRecurrenceTemplate_TicketTemplateDocument" Member="TicketTemplateDocuments" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="TicketTemplateDocument" />
+      <Association Name="TicketRecurrenceTemplate_TicketTemplateVisit" Member="TicketTemplateVisits" ThisKey="UniqueID" OtherKey="TicketRecurrenceTemplateUniqueID" Type="TicketTemplateVisit" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TicketTemplateVisit" Member="TicketTemplateVisits">
+    <Type Name="TicketTemplateVisit">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TicketRecurrenceTemplateUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="VisitNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Subject" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="VisitType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TechnicianUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TechnicianName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Label" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Scheduled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Billable" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ScheduledTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" />
+      <Column Name="PrepTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" />
+      <Column Name="DrivingTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" />
+      <Column Name="ServiceTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" />
+      <Column Name="AdminTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" />
+      <Column Name="BillingTime" Type="System.Decimal" DbType="Decimal(10,3)" CanBeNull="true" />
+      <Column Name="PropertyUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PropertyName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="PropertyAddress" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" />
+      <Column Name="ContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="OffDuty" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TicketTemplateVisit_TicketTemplateAsset" Member="TicketTemplateAssets" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="TicketTemplateAsset" />
+      <Association Name="TicketTemplateVisit_TicketTemplateIssue" Member="TicketTemplateIssues" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="TicketTemplateIssue" />
+      <Association Name="TicketTemplateVisit_TicketTemplateItem" Member="TicketTemplateItems" ThisKey="UniqueID" OtherKey="TemplateUniqueID" Type="TicketTemplateItem" />
+      <Association Name="TicketRecurrenceTemplate_TicketTemplateVisit" Member="TicketRecurrenceTemplate" ThisKey="TicketRecurrenceTemplateUniqueID" OtherKey="UniqueID" Type="TicketRecurrenceTemplate" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Request" Member="Requests">
+    <Type Name="Request">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Customer" Type="System.String" DbType="VarChar(50) NULL" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NULL" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Reporter" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Technician" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Urgency" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VisitUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Contact" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Position" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PromptStatus" Type="System.String" DbType="VarChar(50) NULL" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CloseReason" Type="System.String" DbType="VarChar(500) NULL" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Request_RequestMessage" Member="RequestMessages" ThisKey="UniqueID" OtherKey="RequestUniqueID" Type="RequestMessage" />
+      <Association Name="Request_RequestDocument" Member="RequestDocuments" ThisKey="UniqueID" OtherKey="RequestUniqueID" Type="RequestDocument" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RequestDocument" Member="RequestDocuments">
+    <Type Name="RequestDocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="RequestUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Request_RequestDocument" Member="Request" ThisKey="RequestUniqueID" OtherKey="UniqueID" Type="Request" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.RequestMessage" Member="RequestMessages">
+    <Type Name="RequestMessage">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RequestUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Content" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Request_RequestMessage" Member="Request" ThisKey="RequestUniqueID" OtherKey="UniqueID" Type="Request" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PODocument" Member="PODocuments">
+    <Type Name="PODocument">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="POUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Path" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CopiedFrom" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="PO_PODocument" Member="PO" ThisKey="POUniqueID" OtherKey="UniqueID" Type="PO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PO" Member="POs">
+    <Type Name="PO">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PONumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VendorUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VendorName" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VendorAddress" Type="System.String" DbType="VarChar(400)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrderedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OrderedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateSent" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateRequired" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShipToAddressUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShipToAddressName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ShipToAddress" Type="System.String" DbType="VarChar(400)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ContactName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="InternalNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="VendorComments" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="PO_PODocument" Member="PODocuments" ThisKey="UniqueID" OtherKey="POUniqueID" Type="PODocument" />
+      <Association Name="PO_QBPurchaseOrderSync" Member="QBPurchaseOrderSyncs" ThisKey="UniqueID" OtherKey="POUniqueID" Type="QBPurchaseOrderSync" />
+      <Association Name="PO_PackingSlip" Member="PackingSlips" ThisKey="UniqueID" OtherKey="POUniqueID" Type="PackingSlip" />
+      <Association Name="PO_POLine" Member="POLines" ThisKey="UniqueID" OtherKey="POUniqueID" Type="POLine" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Order]" Member="Orders">
+    <Type Name="Order">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RequestedBy" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateRequested" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RequiredBy" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vendor" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vendor1" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vendor2" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Vendor3" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ManufacturerPartNumber" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CustomerName" Type="System.String" DbType="VarChar(500)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TicketNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Order_OrderUserRelation" Member="OrderUserRelations" ThisKey="UniqueID" OtherKey="OrderLineUniqueID" Type="OrderUserRelation" />
+      <Association Name="Order_POLine" Member="POLines" ThisKey="UniqueID" OtherKey="OrderLineUniqueID" Type="POLine" />
+    </Type>
+  </Table>
+  <Table Name="dbo.OrderUserRelation" Member="OrderUserRelations">
+    <Type Name="OrderUserRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="OrderLineUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Order_OrderUserRelation" Member="Order" ThisKey="OrderLineUniqueID" OtherKey="UniqueID" Type="Order" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InventoryLog" Member="InventoryLogs">
+    <Type Name="InventoryLog">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TransactionUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="ChangeQty" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Action" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Reason" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QBPurchaseOrderSync" Member="QBPurchaseOrderSyncs">
+    <Type Name="QBPurchaseOrderSync">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="POUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="PO_QBPurchaseOrderSync" Member="PO" ThisKey="POUniqueID" OtherKey="UniqueID" Type="PO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.QBPackingSlipSync" Member="QBPackingSlipSyncs">
+    <Type Name="QBPackingSlipSync">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PSUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(5000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Status" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="PackingSlip_QBPackingSlipSync" Member="PackingSlip" ThisKey="PSUniqueID" OtherKey="UniqueID" Type="PackingSlip" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PackingSlip" Member="PackingSlips">
+    <Type Name="PackingSlip">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="CreatedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateReceived" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateModified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BillDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BillDueDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="POUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PONumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PSNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="BillNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ModifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ModifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="DiscountPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="OtherFees" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="FeesDescription" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" />
+      <Column Name="InternalNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" />
+      <Column Name="VendorNotes" Type="System.String" DbType="VarChar(3000)" CanBeNull="true" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="VerifiedByUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VerifiedByName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ShippingTaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="OtherTaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="PackingSlip_QBPackingSlipSync" Member="QBPackingSlipSyncs" ThisKey="UniqueID" OtherKey="PSUniqueID" Type="QBPackingSlipSync" />
+      <Association Name="PackingSlip_PSLine" Member="PSLines" ThisKey="UniqueID" OtherKey="PSUniqueID" Type="PSLine" />
+      <Association Name="PO_PackingSlip" Member="PO" ThisKey="POUniqueID" OtherKey="UniqueID" Type="PO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.POLine" Member="POLines">
+    <Type Name="POLine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ListID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="POUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="OrderLineUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemDescription" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="ManufacturerPartNumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Customer" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="OrderQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReceivedQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UnitPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TotalPrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="TaxCodeName" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxRate" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxAmount" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="POLine_PSLine" Member="PSLines" ThisKey="UniqueID" OtherKey="POLineUniqueID" Type="PSLine" />
+      <Association Name="Order_POLine" Member="Order" ThisKey="OrderLineUniqueID" OtherKey="UniqueID" Type="Order" IsForeignKey="true" />
+      <Association Name="PO_POLine" Member="PO" ThisKey="POUniqueID" OtherKey="UniqueID" Type="PO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PSLine" Member="PSLines">
+    <Type Name="PSLine">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PSUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="POLineUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ItemName" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="QtyReceived" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="QtyRemaining" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="SalePrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="ItemSalePriceEditValue" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="PackingSlip_PSLine" Member="PackingSlip" ThisKey="PSUniqueID" OtherKey="UniqueID" Type="PackingSlip" IsForeignKey="true" />
+      <Association Name="POLine_PSLine" Member="POLine" ThisKey="POLineUniqueID" OtherKey="UniqueID" Type="POLine" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ShipToAddress" Member="ShipToAddresses">
+    <Type Name="ShipToAddress">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="VendorUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ShipToName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Address1" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="City" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsDefault" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateLastChanged" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="ShipToAddress_VendorContact" Member="VendorContacts" ThisKey="UniqueID" OtherKey="ShipToAddressUniqueID" Type="VendorContact" />
+      <Association Name="Vendor_ShipToAddress" Member="Vendor" ThisKey="VendorUniqueID" OtherKey="UniqueID" Type="Vendor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vendor" Member="Vendors">
+    <Type Name="Vendor">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PrefCustomerMsgUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultTaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DefaultTermUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address1" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address2" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="City" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Province" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PostalCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FaxNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AltPhoneNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Country" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="VendorNotes" Type="System.String" DbType="VarChar(8000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DisableShipAddress" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateLastEdited" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AutoPay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="AccountUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AccountName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Vendor_ShipToAddress" Member="ShipToAddresses" ThisKey="UniqueID" OtherKey="VendorUniqueID" Type="ShipToAddress" />
+      <Association Name="Vendor_VendorContact" Member="VendorContacts" ThisKey="UniqueID" OtherKey="VendorUniqueID" Type="VendorContact" />
+    </Type>
+  </Table>
+  <Table Name="dbo.VendorContact" Member="VendorContacts">
+    <Type Name="VendorContact">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ShipToAddressUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VendorUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FaxNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PurchaseOrder" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateLastChanged" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ShipToAddress_VendorContact" Member="ShipToAddress" ThisKey="ShipToAddressUniqueID" OtherKey="UniqueID" Type="ShipToAddress" IsForeignKey="true" />
+      <Association Name="Vendor_VendorContact" Member="Vendor" ThisKey="VendorUniqueID" OtherKey="UniqueID" Type="Vendor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Account" Member="Accounts">
+    <Type Name="Account">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="SyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Account_Item" Member="Items" ThisKey="UniqueID" OtherKey="ExpenseAccountUniqueID" Type="Item" />
+      <Association Name="Account_Item1" Member="Items1" ThisKey="UniqueID" OtherKey="IncomeAccountUniqueID" Type="Item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemCategoryCheckInfo" Member="ItemCategoryCheckInfos">
+    <Type Name="ItemCategoryCheckInfo">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CategoryUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Questions" Type="System.String" DbType="VarChar(5000) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Keywords" Type="System.String" DbType="VarChar(5000) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="ItemCategory_ItemCategoryCheckInfo" Member="ItemCategory" ThisKey="CategoryUniqueID" OtherKey="UniqueID" Type="ItemCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemImage" Member="ItemImages">
+    <Type Name="ItemImage">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="WCID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WCURL" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Image" Type="System.Byte[]" DbType="VarBinary(MAX) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="[Order]" Member="Order" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Item_ItemImage" Member="Item" ThisKey="ItemUniqueID" OtherKey="UniqueID" Type="Item" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemMarkup" Member="ItemMarkups">
+    <Type Name="ItemMarkup">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CategoryUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="RangeStart" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="RangeEnd" Type="System.Int32" DbType="Int" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Markup" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="ItemCategory_ItemMarkup" Member="ItemCategory" ThisKey="CategoryUniqueID" OtherKey="UniqueID" Type="ItemCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemRelation" Member="ItemRelations">
+    <Type Name="ItemRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ParentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ChildUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Item_ItemRelation" Member="Item" ThisKey="ParentUniqueID" OtherKey="UniqueID" Type="Item" IsForeignKey="true" />
+      <Association Name="Item_ItemRelation1" Member="Item1" ThisKey="ChildUniqueID" OtherKey="UniqueID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemCountSession" Member="ItemCountSessions">
+    <Type Name="ItemCountSession">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateStarted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="ItemCountSession_SnapshotItem" Member="SnapshotItems" ThisKey="UniqueID" OtherKey="SessionUniqueID" Type="SnapshotItem" />
+      <Association Name="ItemCountSession_CountedItemLog" Member="CountedItemLogs" ThisKey="UniqueID" OtherKey="SessionUniqueID" Type="CountedItemLog" />
+      <Association Name="ItemCountSession_CountedItem" Member="CountedItems" ThisKey="UniqueID" OtherKey="SessionUniqueID" Type="CountedItem" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CountedItemListRelation" Member="CountedItemListRelations">
+    <Type Name="CountedItemListRelation">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="CountedItem_CountedItemListRelation" Member="CountedItem" ThisKey="ItemUniqueID" OtherKey="UniqueID" Type="CountedItem" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SnapshotItem" Member="SnapshotItems">
+    <Type Name="SnapshotItem">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SessionUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DateTook" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="QtyOnHand" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="QtyOnOrder" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="QtyAvailable" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Association Name="ItemCountSession_SnapshotItem" Member="ItemCountSession" ThisKey="SessionUniqueID" OtherKey="UniqueID" Type="ItemCountSession" IsForeignKey="true" />
+      <Association Name="Item_SnapshotItem" Member="Item" ThisKey="ItemUniqueID" OtherKey="UniqueID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemCategory" Member="ItemCategories">
+    <Type Name="ItemCategory">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ParentUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="WCID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LocalQBSyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LocalWCSyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="WCSyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="ItemCategory_ItemCategoryCheckInfo" Member="ItemCategoryCheckInfos" ThisKey="UniqueID" OtherKey="CategoryUniqueID" Type="ItemCategoryCheckInfo" />
+      <Association Name="ItemCategory_ItemMarkup" Member="ItemMarkups" ThisKey="UniqueID" OtherKey="CategoryUniqueID" Type="ItemMarkup" />
+      <Association Name="ItemCategory_ItemCategoryAlertMessageRelation" Member="ItemCategoryAlertMessageRelations" ThisKey="UniqueID" OtherKey="CategoryUniqueID" Type="ItemCategoryAlertMessageRelation" />
+      <Association Name="ItemCategory_Item" Member="Items" ThisKey="UniqueID" OtherKey="ParentUniqueID" Type="Item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemAlertMessage" Member="ItemAlertMessages">
+    <Type Name="ItemAlertMessage">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="TransactionType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TriggerAction" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDialog" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Image" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="ItemAlertMessage_ItemAlertMessageRelation" Member="ItemAlertMessageRelations" ThisKey="UniqueID" OtherKey="MessageUniqueID" Type="ItemAlertMessageRelation" />
+      <Association Name="ItemAlertMessage_ItemCategoryAlertMessageRelation" Member="ItemCategoryAlertMessageRelations" ThisKey="UniqueID" OtherKey="MessageUniqueID" Type="ItemCategoryAlertMessageRelation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemAlertMessageRelation" Member="ItemAlertMessageRelations">
+    <Type Name="ItemAlertMessageRelation">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="MessageUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="ItemAlertMessage_ItemAlertMessageRelation" Member="ItemAlertMessage" ThisKey="MessageUniqueID" OtherKey="UniqueID" Type="ItemAlertMessage" IsForeignKey="true" />
+      <Association Name="Item_ItemAlertMessageRelation" Member="Item" ThisKey="ItemUniqueID" OtherKey="UniqueID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ItemCategoryAlertMessageRelation" Member="ItemCategoryAlertMessageRelations">
+    <Type Name="ItemCategoryAlertMessageRelation">
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="CategoryUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="MessageUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="ItemCategory_ItemCategoryAlertMessageRelation" Member="ItemCategory" ThisKey="CategoryUniqueID" OtherKey="UniqueID" Type="ItemCategory" IsForeignKey="true" />
+      <Association Name="ItemAlertMessage_ItemCategoryAlertMessageRelation" Member="ItemAlertMessage" ThisKey="MessageUniqueID" OtherKey="UniqueID" Type="ItemAlertMessage" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CountedItemLog" Member="CountedItemLogs">
+    <Type Name="CountedItemLog">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SessionUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Severity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="ItemCountSession_CountedItemLog" Member="ItemCountSession" ThisKey="SessionUniqueID" OtherKey="UniqueID" Type="ItemCountSession" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CountedItem" Member="CountedItems">
+    <Type Name="CountedItem">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ItemUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="SessionUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Qty" Type="System.Decimal" DbType="Decimal(18,3) NOT NULL" CanBeNull="false" />
+      <Column Name="DateCounted" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Warehouse" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CalculatedQty" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Complete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="CountedItem_CountedItemListRelation" Member="CountedItemListRelations" ThisKey="UniqueID" OtherKey="ItemUniqueID" Type="CountedItemListRelation" />
+      <Association Name="ItemCountSession_CountedItem" Member="ItemCountSession" ThisKey="SessionUniqueID" OtherKey="UniqueID" Type="ItemCountSession" IsForeignKey="true" />
+      <Association Name="Item_CountedItem" Member="Item" ThisKey="ItemUniqueID" OtherKey="UniqueID" Type="Item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Item" Member="Items">
+    <Type Name="Item">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QBID" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="WCID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LocalQBSyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="QBSyncToken" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LocalWCSyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WCSyncToken" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ParentUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="SKUNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UPCNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SimpleDescription" Type="System.String" DbType="VarChar(2000)" CanBeNull="true" />
+      <Column Name="DetailDescription" Type="System.Byte[]" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="MaxQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MinQty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Vendor1Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Vendor1UniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Vendor2Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Vendor2UniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Vendor3Name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="Vendor3UniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="BuyFactor" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="SalePrice" Type="System.Decimal" DbType="Decimal(18,3)" CanBeNull="true" />
+      <Column Name="SalePriceEditValue" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VendorPartNumber" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="QtyOnHand" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SalesTaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SalesTaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PurchaseTaxCodeUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PurchaseTaxCodeName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IncomeAccountUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="IncomeAccountName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ExpenseAccountUniqueID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ExpenseAccountName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="StatusUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="StatusName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ShowInWC" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Item_ItemImage" Member="ItemImages" ThisKey="UniqueID" OtherKey="ItemUniqueID" Type="ItemImage" />
+      <Association Name="Item_ItemRelation" Member="ItemRelations" ThisKey="UniqueID" OtherKey="ParentUniqueID" Type="ItemRelation" />
+      <Association Name="Item_ItemRelation1" Member="ItemRelations1" ThisKey="UniqueID" OtherKey="ChildUniqueID" Type="ItemRelation" />
+      <Association Name="Item_SnapshotItem" Member="SnapshotItems" ThisKey="UniqueID" OtherKey="ItemUniqueID" Type="SnapshotItem" />
+      <Association Name="Item_ItemAlertMessageRelation" Member="ItemAlertMessageRelations" ThisKey="UniqueID" OtherKey="ItemUniqueID" Type="ItemAlertMessageRelation" />
+      <Association Name="Item_CountedItem" Member="CountedItems" ThisKey="UniqueID" OtherKey="ItemUniqueID" Type="CountedItem" />
+      <Association Name="Account_Item" Member="Account" ThisKey="ExpenseAccountUniqueID" OtherKey="UniqueID" Type="Account" IsForeignKey="true" />
+      <Association Name="Account_Item1" Member="Account1" ThisKey="IncomeAccountUniqueID" OtherKey="UniqueID" Type="Account" IsForeignKey="true" />
+      <Association Name="ItemCategory_Item" Member="ItemCategory" ThisKey="ParentUniqueID" OtherKey="UniqueID" Type="ItemCategory" IsForeignKey="true" />
+    </Type>
+  </Table>
+	<Table Name="dbo.InvoiceError" Member="InvoiceErrors">
+		<Type Name="InvoiceError">
+			<Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+			<Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+			<Column Name="TransactionUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+			<Column Name="Message" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+			<Column Name="Action" Type="System.Int32" DbType="INT NOT NULL" CanBeNull="false" />
+            <Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+		</Type>
+	</Table>
+	<Table Name="dbo.Chat" Member="Chats">
+		<Type Name="Chat">
+			<Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+			<Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+			<Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+			<Column Name="Name" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+			<Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+			<Column Name="Model" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+			<Column Name="Provider" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+			<Association Name="Chat_ChatMessage" Member="Messages" ThisKey="UniqueID" OtherKey="ChatUniqueID" Type="ChatMessage" />
+		</Type>
+	</Table>
+	<Table Name="dbo.ChatMessage" Member="ChatMessages">
+		<Type Name="ChatMessage">
+			<Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+			<Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+			<Column Name="ChatUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+			<Column Name="Role" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+			<Column Name="Content" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+			<Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+			<Association Name="Chat_ChatMessage" Member="Chat" ThisKey="ChatUniqueID" OtherKey="UniqueID" Type="Chat" IsForeignKey="true" />
+		</Type>
+	</Table>
+	<Table Name="dbo.UserVersionInfo" Member="UserVersionInfos">
+		<Type Name="UserVersionInfo">
+			<Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+			<Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+			<Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+			<Column Name="Version" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+		</Type>
+	</Table>
+	<Table Name="dbo.AIFailureInfo" Member="AIFailureInfos">
+		<Type Name="AIFailureInfo">
+			<Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+			<Column Name="UniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+			<Column Name="UserUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+			<Column Name="Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+			<Column Name="Input" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+			<Column Name="Output" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+			<Column Name="Error" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+		</Type>
+	</Table>
+	<Function Name="dbo.GetTicketStatus" Method="GetTicketStatus">
+    <Parameter Name="TicketUniqueID" Parameter="ticketUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CustomerUniqueID" Parameter="customerUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="ServiceItemType" Parameter="serviceItemType" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="OpenStatusUniqueID" Parameter="openStatusUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="AwaitingApprovalStatusUniqueID" Parameter="awaitingApprovalStatusUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="InvoicingReadyStatusUniqueID" Parameter="invoicingReadyStatusUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="InvoicedStatusUniqueID" Parameter="invoicedStatusUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="NonBillableStatusUniqueID" Parameter="nonBillableStatusUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="GetTicketStatusResult">
+      <Column Name="TicketUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="TicketNumber" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetCustomerBalance" Method="GetCustomerBalance">
+    <Parameter Name="CustomerUniqueID" Parameter="customerUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="VoidStatusUniqueID" Parameter="voidStatusUniqueID" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="GetCustomerBalanceResult">
+      <Column Name="CustomerUniqueID" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="InvoiceTotal" Type="System.Decimal" DbType="Decimal(38,3) NOT NULL" CanBeNull="false" />
+      <Column Name="PaymentTotal" Type="System.Decimal" DbType="Decimal(38,3) NOT NULL" CanBeNull="false" />
+      <Column Name="CreditTotal" Type="System.Decimal" DbType="Decimal(38,3) NOT NULL" CanBeNull="false" />
+      <Column Name="Balance" Type="System.Decimal" DbType="Decimal(38,3)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
