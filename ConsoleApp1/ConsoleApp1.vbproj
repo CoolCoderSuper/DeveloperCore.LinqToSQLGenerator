@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\DeveloperCore.LinqToSQLGenerator\DeveloperCore.LinqToSQLGenerator.vbproj" />
         <!--<AdditionalFiles Include="..\ConsoleApp1\*.dbml" />-->
         <Analyzer Include="..\DeveloperCore.LinqToSQLGenerator\bin\Debug\netstandard2.0\DeveloperCore.LinqToSQLGenerator.dll" />
     </ItemGroup>
@@ -20,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="..\ConsoleApp1\dcFirelight.dbml"/>
+      <AdditionalFiles Include="dcFirelight.dbml"/>
     </ItemGroup>
 
     <ItemGroup>
