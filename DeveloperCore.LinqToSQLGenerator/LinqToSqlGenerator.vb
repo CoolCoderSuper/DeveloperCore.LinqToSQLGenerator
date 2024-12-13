@@ -140,7 +140,7 @@ Public Class LinqToSqlGenerator
                 sbType.AppendLine("End Get")
                 If Not isReadOnly Then
                     sbType.AppendLine("Set")
-                    If Not isNullValueType AndAlso columnSymbol IsNot Nothing AndAlso (columnSymbol.IsValueType OrElse columnSymbol.GetMembers().Any(Function(x) x.Name = "op_Inequality")) Then
+                    If Not isNullValueType AndAlso columnSymbol IsNot Nothing AndAlso columnSymbol.IsValueType Then
                         sbType.AppendLine($"If {fieldName}{fieldValueAccessor} <> Value Then")
                     Else
                         sbType.AppendLine($"If Not Object.Equals({fieldName}{fieldValueAccessor}, Value) Then")
