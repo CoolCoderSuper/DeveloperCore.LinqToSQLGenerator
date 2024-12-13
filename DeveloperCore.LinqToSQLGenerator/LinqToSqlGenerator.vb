@@ -125,7 +125,8 @@ Public Class LinqToSqlGenerator
                 Dim columnTypeFull As String = column.Attribute("Type").Value
                 Dim columnType As String = GetTypeName(columnTypeFull)
                 Dim columnSymbol As INamedTypeSymbol = comp.GetTypeByMetadataName(columnTypeFull)
-                If columnSymbol?.IsValueType AndAlso isNullable Then
+                Dim isNullValueType As Boolean = If(columnSymbol?.IsValueType, False) AndAlso isNullable
+                If isNullValueType Then
                     columnType &= "?"
                 End If
                 Dim fieldType As String = If(isDelayLoaded, $"Link(Of {columnType})", columnType)
@@ -139,7 +140,7 @@ Public Class LinqToSqlGenerator
                 sbType.AppendLine("End Get")
                 If Not isReadOnly Then
                     sbType.AppendLine("Set")
-                    If columnSymbol IsNot Nothing AndAlso (columnSymbol.IsValueType OrElse columnSymbol.GetMembers().Any(Function(x) x.Name = "op_Inequality")) Then
+                    If Not isNullValueType AndAlso columnSymbol IsNot Nothing AndAlso (columnSymbol.IsValueType OrElse columnSymbol.GetMembers().Any(Function(x) x.Name = "op_Inequality")) Then
                         sbType.AppendLine($"If {fieldName}{fieldValueAccessor} <> Value Then")
                     Else
                         sbType.AppendLine($"If Not Object.Equals({fieldName}{fieldValueAccessor}, Value) Then")
