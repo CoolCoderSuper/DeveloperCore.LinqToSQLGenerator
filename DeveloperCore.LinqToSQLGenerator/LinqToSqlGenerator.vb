@@ -235,15 +235,6 @@ Public Class LinqToSqlGenerator
         For Each func As XElement In db.Elements().Where(Function(x) x.Name.LocalName = "Function")
             Dim funcName As String = func.Attribute("Name").Value
             Dim methodName As String = GetSafeName(func.Attribute("Method").Value)
-            Dim type As XElement = func.Elements().First(Function(x) x.Name.LocalName = "ElementType")
-            Dim typeId As String = type.Attribute("IdRef")?.Value
-            Dim typeName As String
-            If typeId Is Nothing Then
-                typeName = GetSafeName(type.Attribute("Name").Value)
-            Else
-                typeName = GetSafeName(types.First(Function(x) x.Attribute("Id")?.Value = typeId).Attribute("Name").Value)
-            End If
-            Dim columns As XElement() = type.Elements().Where(Function(x) x.Name.LocalName = "Column").ToArray()
             Dim params As XElement() = func.Elements().Where(Function(x) x.Name.LocalName = "Parameter").ToArray()
             Dim sbFuncParams As New StringBuilder()
             For Each param As XElement In params
@@ -258,12 +249,27 @@ Public Class LinqToSqlGenerator
             For Each param As XElement In params
                 sbCallValues.Append($", {GetSafeName(If(param.Attribute("Parameter")?.Value, param.Attribute("Name").Value))}")
             Next
+            Dim type As XElement = func.Elements().FirstOrDefault(Function(x) x.Name.LocalName = "ElementType")
+            Dim typeName As String
+            Dim typeId As String
+            If type Is Nothing Then
+                Dim ret As XElement = func.Elements().First(Function(x) x.Name.LocalName = "Return")
+                typeName = GetSafeName(ret.Attribute("Type").Value)
+            Else
+                typeId = type.Attribute("IdRef")?.Value
+                If typeId Is Nothing Then
+                    typeName = GetSafeName(type.Attribute("Name").Value)
+                Else
+                    typeName = GetSafeName(types.First(Function(x) x.Attribute("Id")?.Value = typeId).Attribute("Name").Value)
+                End If
+            End If
             sbContext.AppendLine($"<[Function](Name:=""{funcName}"")>")
             sbContext.AppendLine($"Public Function {methodName}({sbFuncParams}) As ISingleResult(Of {typeName})")
             sbContext.AppendLine($"Dim result As IExecuteResult = ExecuteMethodCall(Me, MethodInfo.GetCurrentMethod(){sbCallValues})")
             sbContext.AppendLine($"Return CType(result.ReturnValue, ISingleResult(Of {typeName}))")
             sbContext.AppendLine("End Function")
-            If typeId Is Nothing Then
+            If type IsNot Nothing AndAlso typeId Is Nothing Then
+                Dim columns As XElement() = type.Elements().Where(Function(x) x.Name.LocalName = "Column").ToArray()
                 Dim sbType As New StringBuilder
                 sbType.AppendLine("Imports System.Data.Linq.Mapping")
                 If entityNamespace IsNot Nothing Then sbType.AppendLine($"Namespace {entityNamespace}")
