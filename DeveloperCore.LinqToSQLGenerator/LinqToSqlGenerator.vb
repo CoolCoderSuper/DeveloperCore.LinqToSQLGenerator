@@ -249,14 +249,14 @@ Public Class LinqToSqlGenerator
             For Each param As XElement In params
                 Dim name As String = param.Attribute("Name").Value
                 Dim dbType As String = param.Attribute("DbType").Value
-                Dim paramName As String = GetSafeName(param.Attribute("Parameter").Value)
+                Dim paramName As String = GetSafeName(If(param.Attribute("Parameter")?.Value, name))
                 Dim paramType As String = GetTypeName(param.Attribute("Type").Value)
                 sbFuncParams.Append($"<Parameter(Name:=""{name}"", DbType:=""{dbType}"")>{paramName} As {paramType}")
                 If param IsNot params.Last Then sbFuncParams.Append(", ")
             Next
             Dim sbCallValues As New StringBuilder()
             For Each param As XElement In params
-                sbCallValues.Append($", {GetSafeName(param.Attribute("Parameter").Value)}")
+                sbCallValues.Append($", {GetSafeName(If(param.Attribute("Parameter")?.Value, param.Attribute("Name").Value))}")
             Next
             sbContext.AppendLine($"<[Function](Name:=""{funcName}"")>")
             sbContext.AppendLine($"Public Function {methodName}({sbFuncParams}) As ISingleResult(Of {typeName})")
