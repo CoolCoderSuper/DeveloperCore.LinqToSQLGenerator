@@ -236,7 +236,13 @@ Public Class LinqToSqlGenerator
             Dim funcName As String = func.Attribute("Name").Value
             Dim methodName As String = GetSafeName(func.Attribute("Method").Value)
             Dim type As XElement = func.Elements().First(Function(x) x.Name.LocalName = "ElementType")
-            Dim typeName As String = GetSafeName(type.Attribute("Name").Value)
+            Dim typeId As String = type.Attribute("IdRef")?.Value
+            Dim typeName As String
+            If typeId Is Nothing Then
+                typeName = GetSafeName(type.Attribute("Name").Value)
+            Else
+                typeName = GetSafeName(types.First(Function(x) x.Attribute("Id")?.Value = typeId).Attribute("Name").Value)
+            End If
             Dim columns As XElement() = type.Elements().Where(Function(x) x.Name.LocalName = "Column").ToArray()
             Dim params As XElement() = func.Elements().Where(Function(x) x.Name.LocalName = "Parameter").ToArray()
             Dim sbFuncParams As New StringBuilder()
@@ -257,30 +263,32 @@ Public Class LinqToSqlGenerator
             sbContext.AppendLine($"Dim result As IExecuteResult = ExecuteMethodCall(Me, MethodInfo.GetCurrentMethod(){sbCallValues})")
             sbContext.AppendLine($"Return CType(result.ReturnValue, ISingleResult(Of {typeName}))")
             sbContext.AppendLine("End Function")
-            Dim sbType As New StringBuilder
-            sbType.AppendLine("Imports System.Data.Linq.Mapping")
-            If entityNamespace IsNot Nothing Then sbType.AppendLine($"Namespace {entityNamespace}")
-            sbType.AppendLine($"Public Partial Class {typeName}")
-            For Each column As XElement In columns
-                Dim columnName As String = column.Attribute("Name").Value
-                Dim memberName As String = If(column.Attribute("Member")?.Value, columnName)
-                Dim memberNameSafe As String = GetSafeName(memberName)
-                Dim columnAccess As String = GetAccessModifier(column.Attribute("AccessModifier")?.Value)
-                Dim columnModifier As String = GetMemberModifier(column.Attribute("Modifier")?.Value)
-                Dim isReadOnly As Boolean = If(column.Attribute("IsReadOnly")?.Value, False)
-                Dim isNullable As Boolean = If(column.Attribute("CanBeNull")?.Value, False)
-                Dim columnTypeFull As String = column.Attribute("Type").Value
-                Dim columnType As String = GetTypeName(columnTypeFull)
-                Dim columnSymbol As INamedTypeSymbol = comp.GetTypeByMetadataName(columnTypeFull)
-                If columnSymbol?.IsValueType AndAlso isNullable Then
-                    columnType &= "?"
-                End If
-                sbType.AppendLine(GetColumnAttributes(column))
-                sbType.AppendLine($"{columnAccess} {columnModifier} {If(isReadOnly, "ReadOnly", "")} Property {memberNameSafe} As {columnType}")
-            Next
-            sbType.AppendLine("End Class")
-            If entityNamespace IsNot Nothing Then sbType.AppendLine("End Namespace")
-            context.AddSource(typeName & ".g.vb", SyntaxFactory.ParseCompilationUnit(sbType.ToString).NormalizeWhitespace.ToFullString)
+            If typeId Is Nothing Then
+                Dim sbType As New StringBuilder
+                sbType.AppendLine("Imports System.Data.Linq.Mapping")
+                If entityNamespace IsNot Nothing Then sbType.AppendLine($"Namespace {entityNamespace}")
+                sbType.AppendLine($"Public Partial Class {typeName}")
+                For Each column As XElement In columns
+                    Dim columnName As String = column.Attribute("Name").Value
+                    Dim memberName As String = If(column.Attribute("Member")?.Value, columnName)
+                    Dim memberNameSafe As String = GetSafeName(memberName)
+                    Dim columnAccess As String = GetAccessModifier(column.Attribute("AccessModifier")?.Value)
+                    Dim columnModifier As String = GetMemberModifier(column.Attribute("Modifier")?.Value)
+                    Dim isReadOnly As Boolean = If(column.Attribute("IsReadOnly")?.Value, False)
+                    Dim isNullable As Boolean = If(column.Attribute("CanBeNull")?.Value, False)
+                    Dim columnTypeFull As String = column.Attribute("Type").Value
+                    Dim columnType As String = GetTypeName(columnTypeFull)
+                    Dim columnSymbol As INamedTypeSymbol = comp.GetTypeByMetadataName(columnTypeFull)
+                    If columnSymbol?.IsValueType AndAlso isNullable Then
+                        columnType &= "?"
+                    End If
+                    sbType.AppendLine(GetColumnAttributes(column))
+                    sbType.AppendLine($"{columnAccess} {columnModifier} {If(isReadOnly, "ReadOnly", "")} Property {memberNameSafe} As {columnType}")
+                Next
+                sbType.AppendLine("End Class")
+                If entityNamespace IsNot Nothing Then sbType.AppendLine("End Namespace")
+                context.AddSource(typeName & ".g.vb", SyntaxFactory.ParseCompilationUnit(sbType.ToString).NormalizeWhitespace.ToFullString)
+            End If
         Next
         sbContext.AppendLine("End Class")
         If contextNamespace IsNot Nothing Then sbContext.AppendLine("End Namespace")
