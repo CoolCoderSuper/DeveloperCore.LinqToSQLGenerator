@@ -2,7 +2,6 @@
 Imports System.Text
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.VisualBasic
-'TODO: Table functions
 'TODO: Make type generators share implementation
 <Generator(LanguageNames.VisualBasic)>
 Public Class LinqToSqlGenerator
@@ -242,7 +241,8 @@ Public Class LinqToSqlGenerator
                 Dim dbType As String = param.Attribute("DbType").Value
                 Dim paramName As String = GetSafeName(If(param.Attribute("Parameter")?.Value, name))
                 Dim paramType As String = GetTypeName(param.Attribute("Type").Value)
-                sbFuncParams.Append($"<Parameter(Name:=""{name}"", DbType:=""{dbType}"")>{paramName} As {paramType}")
+                Dim ref As Boolean = param.Attribute("Direction")?.Value = "InOut"
+                sbFuncParams.Append($"<Parameter(Name:=""{name}"", DbType:=""{dbType}"")>{If(ref, "ByRef ", "")}{paramName} As {paramType}")
                 If param IsNot params.Last Then sbFuncParams.Append(", ")
             Next
             Dim sbCallValues As New StringBuilder()
@@ -252,9 +252,11 @@ Public Class LinqToSqlGenerator
             Dim type As XElement = func.Elements().FirstOrDefault(Function(x) x.Name.LocalName = "ElementType")
             Dim typeName As String
             Dim typeId As String
+            Dim singleResult As Boolean
             If type Is Nothing Then
                 Dim ret As XElement = func.Elements().First(Function(x) x.Name.LocalName = "Return")
                 typeName = GetSafeName(ret.Attribute("Type").Value)
+                singleResult = True
             Else
                 typeId = type.Attribute("IdRef")?.Value
                 If typeId Is Nothing Then
@@ -262,11 +264,20 @@ Public Class LinqToSqlGenerator
                 Else
                     typeName = GetSafeName(types.First(Function(x) x.Attribute("Id")?.Value = typeId).Attribute("Name").Value)
                 End If
+                singleResult = False
             End If
             sbContext.AppendLine($"<[Function](Name:=""{funcName}"")>")
-            sbContext.AppendLine($"Public Function {methodName}({sbFuncParams}) As ISingleResult(Of {typeName})")
+            sbContext.AppendLine($"Public Function {methodName}({sbFuncParams}) As {If(singleResult, typeName, $"ISingleResult(Of {typeName})")}")
             sbContext.AppendLine($"Dim result As IExecuteResult = ExecuteMethodCall(Me, MethodInfo.GetCurrentMethod(){sbCallValues})")
-            sbContext.AppendLine($"Return CType(result.ReturnValue, ISingleResult(Of {typeName}))")
+            Dim position As Integer = 0
+            For Each param As XElement In params
+                If param.Attribute("Direction")?.Value = "InOut" Then
+                    Dim name As String = GetSafeName(If(param.Attribute("Parameter")?.Value, param.Attribute("Name").Value))
+                    sbContext.AppendLine($"{name} = result.GetParameterValue({position})")
+                End If
+                position += 1
+            Next
+            sbContext.AppendLine($"Return CType(result.ReturnValue, {If(singleResult, typeName, $"ISingleResult(Of {typeName})")})")
             sbContext.AppendLine("End Function")
             If type IsNot Nothing AndAlso typeId Is Nothing Then
                 Dim columns As XElement() = type.Elements().Where(Function(x) x.Name.LocalName = "Column").ToArray()
