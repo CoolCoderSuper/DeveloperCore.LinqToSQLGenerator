@@ -2,7 +2,7 @@
 Imports System.Text
 Imports Microsoft.CodeAnalysis
 Imports Microsoft.CodeAnalysis.VisualBasic
-'TODO: Make type generators share implementation
+'TODO: Consistently use short type names
 <Generator(LanguageNames.VisualBasic)>
 Public Class LinqToSqlGenerator
     Implements IIncrementalGenerator
